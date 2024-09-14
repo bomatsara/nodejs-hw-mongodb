@@ -2,8 +2,7 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import { env } from './utils/env.js';
-import router from "./routers/index.js";
-import {getAllContacts} from "./services/contacts.js";
+import router from './routers/index.js';
 
 const PORT = Number(env('PORT', '3000'));
 
