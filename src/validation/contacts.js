@@ -1,0 +1,17 @@
+import Joi from 'joi';
+
+export const createContactValidationSchema = Joi.object({
+  name: Joi.string().min(3).max(20).required(),
+  phone: Joi.number().required(),
+  email: Joi.string().email().optional(),
+  isFavourite: Joi.boolean().optional(),
+  contactType: Joi.string().valid('work', 'home', 'personal').default('personal').required()
+});
+
+export const updateContactValidationSchema = Joi.object({
+  name: Joi.string().min(3).max(20).optional(),
+  phone: Joi.number().optional(),
+  email: Joi.string().email().optional(),
+  isFavourite: Joi.boolean().optional(),
+  contactType: Joi.string().valid('work', 'home', 'personal').optional()
+});
