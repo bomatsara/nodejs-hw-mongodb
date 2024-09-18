@@ -7,12 +7,12 @@ const parseSortOrder = (sortOrder) => {
 };
 
 const parseSortBy = (sortBy) => {
-  const keysOfStudent = [
+  const keysOfContact = [
     '_id',
     'name',
   ];
 
-  if (keysOfStudent.includes(sortBy)) {
+  if (keysOfContact.includes(sortBy)) {
     return sortBy;
   }
 
