@@ -5,7 +5,8 @@ export const createContactValidationSchema = Joi.object({
   phoneNumber: Joi.number().required(),
   email: Joi.string().email().optional(),
   isFavourite: Joi.boolean().optional(),
-  contactType: Joi.string().valid('work', 'home', 'personal').default('personal').required()
+  contactType: Joi.string().valid('work', 'home', 'personal').default('personal').required(),
+  photo: Joi.string().optional()
 });
 
 export const updateContactValidationSchema = Joi.object({
@@ -13,5 +14,6 @@ export const updateContactValidationSchema = Joi.object({
   phoneNumber: Joi.number().optional(),
   email: Joi.string().email().optional(),
   isFavourite: Joi.boolean().optional(),
-  contactType: Joi.string().valid('work', 'home', 'personal').optional()
+  contactType: Joi.string().valid('work', 'home', 'personal').optional(),
+  photo: Joi.string().optional()
 });

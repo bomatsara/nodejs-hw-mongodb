@@ -27,7 +27,8 @@ const contactSchema = new Schema(
       type: Types.ObjectId,
       ref: 'users',
       required: true
-    }
+    },
+    photo: { type: String }
   },
   {
     timestamps: true,

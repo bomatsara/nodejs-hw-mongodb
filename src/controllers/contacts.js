@@ -3,6 +3,7 @@ import createHttpError from 'http-errors';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
 export const getContactsController = async (req, res, next) => {
   const { page, perPage } = parsePaginationParams(req.query);
@@ -49,7 +50,19 @@ export const getContactByIdController = async (req, res, next) => {
 
 export const createContactController = async (req, res) => {
   const userId = req.user._id;
-  const contactData = { ...req.body, userId };
+  const photo = req.file;
+
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToCloudinary(photo);
+  }
+
+  const contactData = {
+    ...req.body,
+    userId,
+    ...(photoUrl && { photo: photoUrl }),
+  };
   const contact = await createContact(contactData);
 
   res.status(201).json({
@@ -62,8 +75,20 @@ export const createContactController = async (req, res) => {
 export const upsertContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const userId = req.user._id;
+  const photo = req.file;
 
-  const result = await updateContact(contactId, req.body, {
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToCloudinary(photo);
+  }
+
+  const updatedContactData = {
+    ...req.body,
+    ...(photoUrl && { photo: photoUrl }),
+  };
+
+  const result = await updateContact(contactId, updatedContactData, {
     userId,
     upsert: true,
   });
@@ -97,9 +122,17 @@ export const deleteContactController = async (req, res, next) => {
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const userId = req.user._id;
+  const photo = req.file;
+
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToCloudinary(photo);
+  }
 
   const result = await updateContact(contactId, req.body, {
-    userId
+    userId,
+    ...(photoUrl && { photo: photoUrl }),
   });
 
   if (!result) {
