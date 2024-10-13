@@ -1,0 +1,67 @@
+tags:
+  - Contacts
+summary: Patch contact by id
+operationId: patchContact
+description: 'Patch contact by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '66e457e32897aa2b68d0ca8a'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'Andrii'
+          phoneNumber:
+            description: "Contact's phone number"
+            type: string
+            example: '0999999999'
+          email:
+            description: "Contact's email"
+            type: string
+            example: '83971andrey@gmail.com'
+          isFavourite:
+            description: 'Is contact favorite'
+            type: boolean
+            example: false
+          contactType:
+            description: "Contact type"
+            type: string
+            enum: ["work", "home", "personal"]
+          photo:
+            description: "Link to contact's poster"
+            type: string
+            example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+responses:
+  '200':
+    description: 'Contact patched successfully'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found contact with id 66e457e32897aa2b68d0ca8a!
+            data:
+              type: object
+              $ref: '../../../components/schemas/contact.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
