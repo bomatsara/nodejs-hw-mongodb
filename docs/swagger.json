@@ -211,7 +211,7 @@
                   "photo": {
                     "description": "Link to contact's poster",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+                    "example": "https://res.cloudinary.com/dhofdkvlq/image/upload/image.png"
                   }
                 }
               }
@@ -409,7 +409,7 @@
                   "photo": {
                     "description": "Link to contact's poster",
                     "type": "string",
-                    "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+                    "example": "https://res.cloudinary.com/dhofdkvlq/image/upload/image.png"
                   }
                 }
               }
@@ -513,7 +513,7 @@
           "photo": {
             "description": "Link to contact's poster",
             "type": "string",
-            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+            "example": "https://res.cloudinary.com/dhofdkvlq/image/upload/image.png"
           }
         }
       }
